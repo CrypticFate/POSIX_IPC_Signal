@@ -2,8 +2,9 @@
 #define UNISTD_H
 
 #include <process.h>
-#include <windows.h>
+// #include <windows.h>
 #include "signal.h"
+#include "kernel.h"
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -13,7 +14,7 @@ typedef int pid_t;
 
 inline pid_t getpid()
 {
-    return GetCurrentProcessId();
+    return Kernel::getInstance()->getCurrentPid();
 }
 
 // Simple fork implementation for Windows

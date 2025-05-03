@@ -71,7 +71,13 @@ The shell supports the following commands:
 
 1. `test_trap` - Demonstrates signal trapping functionality
 2. `test_kill` - Demonstrates kill functionality
-3. `test_signals` - Comprehensive test of various signal behaviors
+3. `test_signals` - Comprehensive test of all signal behaviors
+
+## Run all the test cases:
+```
+sudo make clean && make all && ./test/test_signals
+```
+
 
 ## Signal API
 

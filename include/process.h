@@ -29,6 +29,7 @@ private:
     SigSet pendingSignals;               // Pending signals
     SigSet blockedSignals;               // Blocked signals
     bool interrupted;                    // Flag for interruption
+    mutable std::mutex signalMutex;       // Mutex for signal operations
 
 public:
     Process(int id);
@@ -46,6 +47,16 @@ public:
     void blockSignal(int signum);
     void unblockSignal(int signum);
     void processSignals();
+
+    // Signal mask management
+    const SigSet& getBlockedSignals() const { 
+        std::lock_guard<std::mutex> lock(signalMutex);
+        return blockedSignals; 
+    }
+    void setBlockedSignals(const SigSet& mask) { 
+        std::lock_guard<std::mutex> lock(signalMutex);
+        blockedSignals = mask;
+    }
 
     // Thread management
     void start(std::function<void()> func);

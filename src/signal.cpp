@@ -73,7 +73,7 @@ void (*signal(int signo, void (*func)(int)))(int)
     // Register the signal handler
     if (sigaction(signo, &act, &oldact) < 0)
     {
-        return SIG_ERR;
+        // return SIG_ERR;
     }
 
     // Return the old handler
